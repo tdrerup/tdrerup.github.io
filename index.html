@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilman Drerup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            margin-bottom: 60px;
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .title {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .contact {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .contact a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        nav {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #000;
+        }
+
+        .nav-link.active {
+            color: #000;
+            border-bottom-color: #0066cc;
+        }
+
+        main {
+            min-height: 400px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 25px 0 10px 0;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .section ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .update-item {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .update-item:last-child {
+            border-bottom: none;
+        }
+
+        .update-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .update-title {
+            font-size: 18px;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .update-description {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .cv-section {
+            margin-bottom: 35px;
+        }
+
+        .cv-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .cv-item {
+            margin-bottom: 20px;
+        }
+
+        .cv-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 3px;
+        }
+
+        .cv-item-details {
+            font-size: 15px;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .cv-item-description {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .research-item {
+            margin-bottom: 17px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .research-item:last-child {
+            border-bottom: none;
+        }
+
+        .research-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .research-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .project-item {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .project-tech {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .project-details {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .skill-category {
+            margin-bottom: 20px;
+        }
+
+        .skill-category h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .skill-list {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .download-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .nav-link {
+                font-size: 15px;
+            }
+
+            .section h2 {
+                font-size: 22px;
+            }
+        }
+
+        /* Make all links use the same color and hover style */
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .about-image {
+            float: right;
+            margin-left: 30px;
+            margin-bottom: 10px;
+            max-width: 238px;
+            width: 43%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        @media (max-width: 600px) {
+            .about-image {
+                float: none;
+                display: block;
+                margin: 0 auto 20px auto;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="name">Tilman Drerup</h1>
+            <p class="title">Economics & Machine Learning</p>
+            <div class="contact">
+                <a href="https://www.linkedin.com/in/tilman-drerup-1661a810b/">LinkedIn</a> • 
+                <a href="https://github.com/tdrerup">GitHub</a> •
+                <a href="https://scholar.google.com/citations?user=AeNZXSEAAAAJ&hl=en">Google Scholar</a>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" onclick="showSection('about')">About</a>
+                <a href="#" class="nav-link" onclick="showSection('research')">Research</a>
+                <a href="#" class="nav-link" onclick="showSection('blog')">Blog</a>
+                <a href="#" class="nav-link" onclick="showSection('projects')">Projects</a>
+                <a href="#" class="nav-link" onclick="showSection('cv')">CV</a>
+            </div>
+        </nav>
+
+        <main>
+            <section id="about" class="section active">
+                <h2>Hi there!</h2>
+                <img src="economics_and_machine_learning.png" alt="Economics and Machine Learning" class="about-image">
+                <p>I am a Senior Director of Machine Learning Engineering at Instacart in San Francisco, California. Working at the intersection of economics and machine learning, my team and I tackle a diverse set of topics, including ads, pricing, and growth.</p>
+                <p>You can contact me through <a href="https://www.linkedin.com/in/tilman-drerup-1661a810b/">LinkedIn</a>.</p>
+            </section>
+
+            <section id="research" class="section">
+                <h2>Research</h2>
+                <p>I have worked as a postdoctoral researcher in economics at <a href="http://siepr.stanford.edu/" target="_blank">Stanford University</a> under the supervision of Prof. Susan Athey and as a postdoctoral researcher at the <a href="https://www.iame.uni-bonn.de/" target="_blank">Bonn Institute for Applied Microeconomics</a>.</p>
+                <p>My research focuses on applied microeconometrics, machine learning, and behavioral finance, with particular emphasis on user heterogeneity, dimension reduction in choice models, and the estimation of price elasticities. I am also interested in the role of beliefs and non-standard choice behavior in financial decision making.</p>
+                <h3>Selected Papers</h3>
+                <div class="research-item">
+                    <div class="research-title">Designing Promises with Reference-Dependent Customers: The Case of Online Grocery Delivery Time</div>
+                    <div class="research-meta">2022 • with George Gui (Columbia) • <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4298782" target="_blank">SSRN</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">Skewness Expectations and Portfolio Choice</div>
+                    <div class="research-meta">2023 • with Matthias Wibral (Maastricht) and Christian Zimpelmann (Bonn) • <a href="https://link.springer.com/article/10.1007/s10683-022-09780-9" target="_blank">Journal of Experimental Economics</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">Eliciting Subjective Expectations for Bivariate Outcomes</div>
+                    <div class="research-meta">2019 • <a href="https://doi.org/10.1016/j.jbef.2019.05.002" target="_blank">Journal of Behavioral and Experimental Finance</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">The Precision of Subjective Data and the Explanatory Power of Economic Models</div>
+                    <div class="research-meta">2017 • with Benjamin Enke (Harvard) and Hans-Martin von Gaudecker (Bonn) • <a href="https://doi.org/10.1016/j.jeconom.2017.06.017" target="_blank">Journal of Econometrics</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">Diurnal Rhythms in Investor Sentiment</div>
+                    <div class="research-meta">2015 • <a href="https://doi.org/10.1016/j.jbef.2015.07.002" target="_blank">Journal of Behavioral and Experimental Finance</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">Recommendation Revisions and Differences in the Interpretation of Earnings</div>
+                    <div class="research-meta">2014 • <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2188359" target="_blank">SSRN</a></div>
+                </div>
+                <div class="research-item">
+                    <div class="research-title">Long-Term Effects of Hedge Fund Activism in Germany</div>
+                    <div class="research-meta">2014 • <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1718365" target="_blank">SSRN</a></div>
+                </div>
+
+                <h3>Selected Patents</h3>
+                <div class="research-item">
+                    <div class="research-title">Patent: Trustless Physical Cryptocurrency</div>
+                    <div class="research-details">2021 • Granted • <a href="https://patents.google.com/patent/US10896412B2/en" target="_blank">Link</a></div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <h2>Projects</h2>
+                <h3>Selected Software Projects</h3>
+                <div class="project-item">
+                    <div class="project-title">Elliptic Curve Solidity</div>
+                    <div class="project-details"><a href="https://github.com/tdrerup/elliptic-curve-solidity" target="_blank">GitHub</a></div>
+                    <div class="project-description">A JavaScript/Solidity implementation of elliptic curve math, parameterized for ECDSA signature verification for curve secp256r1/prime256v1/p256 on Ethereum.</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">Binary Choice Double Index</div>
+                    <div class="project-details"><a href="https://github.com/tdrerup/binary_choice_double_index" target="_blank">GitHub</a></div>
+                    <div class="project-description">A Python implementation of the semiparametric double-index estimator of Klein and Vella (2009).</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">KONG.CASH Mobile App</div>
+                    <div class="project-details"><a href="https://apps.apple.com/app/id1479791375" target="_blank">App Store</a></div>
+                    <div class="project-description">Mobile app for verifying physical crypto notes using smart contracts, elliptic curve math, and NFC.</div>
+                </div>
+            </section>
+
+            <section id="blog" class="section">
+                <h2>Blog</h2>
+                <p>Once in a while, I blog about some of my team's work the intersection of economics and machine learning.</p>
+                <h3>Recent Posts</h3>
+                <div class="update-item">
+                    <div class="update-date">June 2024</div>
+                    <div class="update-description">Toban Wiebe, Fang Guo, Rustin Partow, and I have written a <a href="https://medium.com/tech-at-instacart/bandits-for-marketing-optimization-f5a63b9bfaa7" target="_blank">blog post</a> on some recent work we have done to optimally allocate marketing spend via adaptive experimentation.</div>
+                </div>
+                <div class="update-item">
+                    <div class="update-date">April 2024</div>
+                    <div class="update-description">Levi Boxell, Robert Fletcher, and I have written a <a href="https://tech.instacart.com/optimizing-at-the-edge-using-regression-discontinuity-designs-to-power-decision-making-51e296615046" target="_blank">blog post</a> on using regression discontinuities to power decision-making. Check it out!</div>
+                </div>
+                <div class="update-item">
+                    <div class="update-date">November 2023</div>
+                    <div class="update-description">Levi Boxell, Robert Fletcher, and I have written a <a href="https://tech.instacart.com/the-economics-team-at-instacart-94c48db951e8" target="_blank">blog post</a> to describe the kind of work that Instacart's Economics team is working on and the tools and skills we deploy.</div>
+                </div>
+            </section>
+
+            <section id="cv" class="section">
+                <h2>CV</h2>
+                <div class="cv-section">
+                    <h3>Experience</h3>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Instacart</div>
+                        <div class="cv-item-details">Since 2024 • Senior Director of Machine Learning Engineering</div>
+                        <div class="cv-item-details">2022-2024 • Director of Machine Learning Engineering</div>
+                        <div class="cv-item-details">2020-2022 • Senior Manager of Machine Learning Engineering</div>
+                        <div class="cv-item-details">2020-2020 • Staff Economist / Machine Learning Engineer</div>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-title">WeWork</div>
+                        <div class="cv-item-details">2019-2020 • Senior Economist</div>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Airtime Network</div>
+                        <div class="cv-item-details">2018-2019 • Co-Founder</div>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Stanford University</div>
+                        <div class="cv-item-details">2016-2017 • Postdoctoral Researcher in Economics under the supervision of Prof. Susan Athey</div>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Bonn University</div>
+                        <div class="cv-item-details">2013-2016 • (Postdoctoral) Researcher in Economics</div>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Gameconomy GmbH</div>
+                        <div class="cv-item-details">2002-2006 • Founder / CEO</div>
+                    </div>
+                    <h3>Education</h3>
+                    <div class="cv-item">
+                        <div class="cv-item-title">Bonn Graduate School of Economics</div>
+                        <div class="cv-item-details">2015 • Ph.D. in Economics</div>
+                        <div class="cv-item-details">2009 • Diploma in Economics</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Highlight active nav link
+            event.target.classList.add('active');
+        }
+
+        // Simple fade-in animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.3s ease-in';
+                document.body.style.opacity = '1';
+            }, 50);
+        });
+    </script>
+</body>
+</html>
